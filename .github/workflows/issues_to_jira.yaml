@@ -15,6 +15,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Create JIRA ticket
+        env:
+           ISSUE_DESCRIPTION: ${{ github.event.issue.body }}
         run: |              
           # Determine Bug/Enhancement
           if ${{ contains(github.event.*.labels.*.name, 'Bug') }}; then
@@ -28,7 +30,12 @@ jobs:
                   --arg title '${{ github.event.issue.title }}' \
                   --arg url '${{ github.event.issue.html_url }}' \
                   --arg submitter '${{ github.event.issue.user.login }}' \
-                  --arg body '${{ github.event.issue.body }}' \
+                  --arg body "" \
+                  
+                  # canonical doesn't encourage discussions in JIRA on pulic project issues
+                  # thus it is recommended to to put description in JIRA to push conversation to GH
+                  # if strongly required, then uncomment next line and remove prvious body arg
+                  # --arg body "$ISSUE_DESCRIPTION" \
                   --arg type "$type" \
                   --arg action '${{ github.event.action }}' \
                   '{title: $title, url: $url, submitter: $submitter, body: $body, type: $type, action: $action}' )
