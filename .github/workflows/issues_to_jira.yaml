@@ -27,8 +27,8 @@ jobs:
           
           # send JIRA request
                             
-          # canonical doesn't encourage discussions in JIRA on pulic project issues
-          # thus it is recommended to to put description in JIRA to push conversation to GH
+          # canonical doesn't encourage discussions in JIRA on pulic project issues.
+          # thus, it is NOT recommended to put description in JIRA in order to push conversation to GitHub
           # if strongly required, then replace '--arg body ""' with the next line
           # --arg body "$ISSUE_DESCRIPTION" 
                   
